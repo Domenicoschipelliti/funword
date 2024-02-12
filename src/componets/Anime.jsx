@@ -32,21 +32,24 @@ const Anime = () => {
   return (
     <Container>
       <Row>
-        <Col md={8} lg={4}>
-          <h3>Anime</h3>
-          {anime.map((animeList) => {
-            return (
-              <Figure>
-                <Figure.Image
-                  width={171}
-                  height={180}
-                  alt="171x180"
-                  src={animeList.immagine}
-                />
-                <Figure.Caption>{animeList.titolo}</Figure.Caption>
-              </Figure>
-            );
-          })}
+        <h3 className="text-light">Anime</h3>
+        <Col className="dis">
+          {anime &&
+            anime.map((animeList, i) => {
+              return (
+                <Figure className="figure" key={i}>
+                  <Figure.Image
+                    width={171}
+                    height={180}
+                    alt="171x180"
+                    src={animeList.immagine}
+                  />
+                  <Figure.Caption className="text-light">
+                    {animeList.titolo}
+                  </Figure.Caption>
+                </Figure>
+              );
+            })}
         </Col>
       </Row>
     </Container>
