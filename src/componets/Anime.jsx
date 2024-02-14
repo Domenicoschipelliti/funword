@@ -7,8 +7,7 @@ const Anime = () => {
   const MyAnime = () => {
     fetch("http://localhost:3001/anime", {
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxMmY1ZDVhNS04YWFmLTQ1ODgtYjljZC0xYzM4ZWEzODk3MjAiLCJpYXQiOjE3MDc1Njc0NTksImV4cCI6MTcwODE3MjI1OX0.tgXAzuys8_VEwrxkczWQtA9Hc0C7nvCAZ08n1qoYdMqiyyPMZusZkpzbUTqn4Fua",
+        Authorization: localStorage.getItem("accessToken"),
       },
     })
       .then((res) => {

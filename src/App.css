@@ -28,3 +28,25 @@ body {
 .pa {
   padding: 0 !important;
 }
+.log {
+  display: flex;
+  justify-content: center;
+  color: white;
+}
+
+.image {
+  width: 75px !important;
+}
+
+.color {
+  background-color: lightcoral !important;
+}
+
+.divisore {
+  display: flex;
+  justify-content: center;
+}
+
+.co {
+  color: lightcoral;
+}

@@ -1,6 +1,5 @@
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "./SearchBar";
 
 const MyNavBar = () => {
   const navigate = useNavigate();
@@ -9,18 +8,20 @@ const MyNavBar = () => {
     <Navbar collapseOnSelect expand="lg" bg="black" data-bs-theme="dark">
       <Container>
         <Navbar.Brand
-          href="#home"
           onClick={() => {
             navigate("/");
           }}
         >
-          Home
+          <img
+            src="https://cdn.discordapp.com/attachments/1186353558132633643/1207040744255258654/fungio_domi.png?ex=65de334b&is=65cbbe4b&hm=0c7711d0185a669e15c2d04fbc71d8a6acb153d1926af22d19b40f218ea139dd&"
+            alt="logo.png"
+            className="image"
+          />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link
-              href="#chisono"
               onClick={() => {
                 navigate("/chisono");
               }}
@@ -30,32 +31,30 @@ const MyNavBar = () => {
           </Nav>
           <Nav>
             <Nav.Link
-              href="#login"
               onClick={() => {
-                navigate("/logim");
+                navigate("/login");
               }}
             >
               Accedi
             </Nav.Link>
           </Nav>
-          <Form className="d-flex">
+          <Form
+            className="d-flex"
+            onSubmit={(e) => {
+              e.preventDefault();
+              navigate("/search");
+            }}
+          >
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
-              onSubmit={(e) => {
-                e.preventDefault();
-                e.target.value();
-                navigate("/search");
-                <SearchBar />;
-              }}
             />
             <Button
               variant="outline-danger"
               onSubmit={(e) => {
                 e.preventDefault();
-                <SearchBar />;
               }}
               onClick={() => {
                 navigate("/search");

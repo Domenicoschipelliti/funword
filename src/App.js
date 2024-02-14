@@ -6,6 +6,9 @@ import Home from "./componets/Home";
 import MyNavBar from "./componets/MyNavBar";
 import MyFooter from "./componets/MyFoteer";
 import SearchBar from "./componets/SearchBar";
+import ChiSiamo from "./componets/ChiSiamo";
+import Login from "./componets/Login";
+import Register from "./componets/Register";
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<SearchBar />} />
+          <Route path="/chisono" element={<ChiSiamo />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
 
         <MyFooter />
