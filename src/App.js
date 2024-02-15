@@ -17,7 +17,7 @@ function App() {
         <MyNavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/search" element={<SearchBar />} />
+          <Route path="/anime/titolo" element={<SearchBar />} />
           <Route path="/chisono" element={<ChiSiamo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

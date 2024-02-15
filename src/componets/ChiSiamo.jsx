@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Col, Container, Modal, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Modal, Row } from "react-bootstrap";
 
 const ChiSiamo = () => {
   return (

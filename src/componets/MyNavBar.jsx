@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const MyNavBar = () => {
   const navigate = useNavigate();
+
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/anime/titolo?titolo=${searchQuery}`);
+  };
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="black" data-bs-theme="dark">
@@ -38,28 +46,18 @@ const MyNavBar = () => {
               Accedi
             </Nav.Link>
           </Nav>
-          <Form
-            className="d-flex"
-            onSubmit={(e) => {
-              e.preventDefault();
-              navigate("/search");
-            }}
-          >
+          <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={searchQuery}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+              }}
             />
-            <Button
-              variant="outline-danger"
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-              onClick={() => {
-                navigate("/search");
-              }}
-            >
+            <Button type="submit" variant="outline-danger">
               <i className="bi bi-search"></i>
             </Button>
           </Form>

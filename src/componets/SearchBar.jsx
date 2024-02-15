@@ -1,37 +1,37 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Figure, Row } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Alert, Col, Container, Figure, Row } from "react-bootstrap";
+import { useLocation, useParams } from "react-router-dom";
 
-// headers: {
-//   Authorization:
-//     "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxMmY1ZDVhNS04YWFmLTQ1ODgtYjljZC0xYzM4ZWEzODk3MjAiLCJpYXQiOjE3MDc1Njc0NTksImV4cCI6MTcwODE3MjI1OX0.tgXAzuys8_VEwrxkczWQtA9Hc0C7nvCAZ08n1qoYdMqiyyPMZusZkpzbUTqn4Fua",
-// },
+const SearchBar = ({ searchQuery }) => {
+  const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState(false);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const titolo = searchParams.get("titolo");
 
-const SearchBar = () => {
-  let [search, setSearch] = useState(null);
-
-  const [titolo, setTitolo] = useState("");
-  console.log(titolo);
+  // const { titolo } = useParams();
+  console.log("ciiiiiiiiiiiiiii", titolo);
+  console.log(searchResults);
   const Ricerca = () => {
-    fetch("http://localhost:3001/anime/titolo?titolo=" + titolo, {
+    fetch(`http://localhost:3001/anime/titolo?titolo=${titolo}`, {
       headers: {
-        Authorization:
-          "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxMmY1ZDVhNS04YWFmLTQ1ODgtYjljZC0xYzM4ZWEzODk3MjAiLCJpYXQiOjE3MDc1Njc0NTksImV4cCI6MTcwODE3MjI1OX0.tgXAzuys8_VEwrxkczWQtA9Hc0C7nvCAZ08n1qoYdMqiyyPMZusZkpzbUTqn4Fua",
+        Authorization: localStorage.getItem("accessToken"),
       },
     })
       .then((res) => {
         if (res.ok) {
-          console.log("eccomi ", titolo);
-          console.log(search);
+          console.log("ecco qua ", res);
+          console.log("titolo", titolo);
           return res.json();
         } else {
+          setError(true);
           throw new Error("errore nella get anime");
         }
       })
-      .then((res) => {
-        console.log("ricerca completata ", res);
-        setSearch(res);
-        setTitolo("");
+      .then((data) => {
+        console.log("ricerca completata ", data);
+        setSearchResults(data);
+        console.log("titolo", searchQuery);
       })
       .catch((err) => {
         console.log("errore specififcato ", err);
@@ -40,39 +40,40 @@ const SearchBar = () => {
   useEffect(() => {
     Ricerca();
   }, [titolo]);
-
+  console.log("titolo ", titolo);
+  const ricerca = searchResults;
+  console.log(ricerca);
+  if (!titolo) {
+    return <div>Titolo non definito nell'URL.</div>;
+  }
   return (
     <Container>
       <Row>
-        {search !== null &&
-          search.map((ser, i) => {
-            console.log(search);
-            console.log(titolo);
-            return (
-              <Col key={i}>
-                <Figure
-                  className="figure"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                  }}
-                  onChange={(e) => {
-                    setSearch(e.target.value);
-                    setTitolo(e.target.value);
-                  }}
-                >
-                  <Figure.Image
-                    width={171}
-                    height={180}
-                    alt="171x180"
-                    src={ser.immagine}
-                  />
-                  <Figure.Caption className="text-light">
-                    {ser.titolo}
-                  </Figure.Caption>
-                </Figure>
-              </Col>
-            );
-          })}
+        {searchResults && searchResults.length > 0 ? (
+          searchResults.map((animeList, index) => (
+            <Col key={index}>
+              <Figure className="figure">
+                <Figure.Image
+                  width={171}
+                  height={180}
+                  value={searchResults}
+                  alt={animeList.titolo || "Immagine"}
+                  src={animeList.immagine}
+                />
+                <Figure.Caption className="text-light">
+                  {animeList.titolo || "Nessun titolo"}
+                </Figure.Caption>
+                <Alert show={error} variant="danger">
+                  Ricerca fallita.
+                </Alert>
+              </Figure>
+            </Col>
+          ))
+        ) : (
+          <Col className="divisore">
+            <p className="text-light ">Nessun risultato trovato.</p>
+          </Col>
+        )}
       </Row>
     </Container>
   );
