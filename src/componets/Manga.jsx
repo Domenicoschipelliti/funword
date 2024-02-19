@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Figure, Row } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const Manga = () => {
   let [manga, setManga] = useState([]);
+
   const MyManga = () => {
     fetch("http://localhost:3001/manga", {
       headers: {
@@ -35,17 +37,20 @@ const Manga = () => {
           {manga &&
             manga.map((mangaList, i) => {
               return (
-                <Figure className="figure" key={i}>
-                  <Figure.Image
-                    width={171}
-                    height={180}
-                    alt="171x180"
-                    src={mangaList.immagine}
-                  />
-                  <Figure.Caption className="text-light">
-                    {mangaList.titolo}
-                  </Figure.Caption>
-                </Figure>
+                <Link key={i} to={`/manga/${mangaList.id}`}>
+                  <Figure className="figure" key={i}>
+                    <Figure.Image
+                      width={171}
+                      height={180}
+                      alt="171x180"
+                      value={mangaList}
+                      src={mangaList.immagine}
+                    />
+                    <Figure.Caption className="text-light">
+                      {mangaList.titolo}
+                    </Figure.Caption>
+                  </Figure>
+                </Link>
               );
             })}
         </Col>

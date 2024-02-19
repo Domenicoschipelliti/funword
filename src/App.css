@@ -50,3 +50,24 @@ body {
 .co {
   color: lightcoral;
 }
+
+.blocco {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 10px;
+}
+
+.blocco2 {
+  display: flex;
+  width: 255px;
+}
+
+.bot {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.gi {
+  color: white;
+}

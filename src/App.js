@@ -9,6 +9,10 @@ import SearchBar from "./componets/SearchBar";
 import ChiSiamo from "./componets/ChiSiamo";
 import Login from "./componets/Login";
 import Register from "./componets/Register";
+import MangaMore from "./componets/MangaMore";
+import AnimeMore from "./componets/AnimeMore";
+import AnimeMod from "./componets/AnimeMod";
+import MangaMod from "./componets/MangaMod";
 
 function App() {
   return (
@@ -16,6 +20,10 @@ function App() {
       <BrowserRouter>
         <MyNavBar />
         <Routes>
+          <Route path="/anime/edit/:id" element={<AnimeMod />} />
+          <Route path="/manga/edit/:id" element={<MangaMod />} />
+          <Route path="/anime/:id" element={<AnimeMore />} />
+          <Route path="/manga/:id" element={<MangaMore />} />
           <Route path="/" element={<Home />} />
           <Route path="/anime/titolo" element={<SearchBar />} />
           <Route path="/chisono" element={<ChiSiamo />} />

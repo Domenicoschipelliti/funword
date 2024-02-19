@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Figure, Row } from "react-bootstrap";
+import { Col, Container, Figure, Row, Spinner } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Anime = () => {
   let [anime, SetAnime] = useState([]);
@@ -36,17 +37,25 @@ const Anime = () => {
           {anime &&
             anime.map((animeList, i) => {
               return (
-                <Figure className="figure" key={i}>
-                  <Figure.Image
-                    width={171}
-                    height={180}
-                    alt="171x180"
-                    src={animeList.immagine}
-                  />
-                  <Figure.Caption className="text-light">
-                    {animeList.titolo}
-                  </Figure.Caption>
-                </Figure>
+                <Link key={i} to={`/anime/${animeList.id}`}>
+                  <Figure className="figure">
+                    <Figure.Image
+                      width={171}
+                      height={180}
+                      alt="171x180"
+                      src={
+                        animeList.immagine || (
+                          <Spinner animation="border" variant="danger" />
+                        )
+                      }
+                    />
+                    <Figure.Caption className="text-light">
+                      {animeList.titolo || (
+                        <Spinner animation="border" variant="danger" />
+                      )}
+                    </Figure.Caption>
+                  </Figure>
+                </Link>
               );
             })}
         </Col>

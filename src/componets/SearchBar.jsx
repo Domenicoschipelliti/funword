@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Alert, Col, Container, Figure, Row } from "react-bootstrap";
-import { useLocation, useParams } from "react-router-dom";
+import { Alert, Button, Col, Container, Figure, Row } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchBar = ({ searchQuery }) => {
   const [searchResults, setSearchResults] = useState([]);
@@ -8,6 +8,7 @@ const SearchBar = ({ searchQuery }) => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const titolo = searchParams.get("titolo");
+  const navigate = useNavigate();
 
   // const { titolo } = useParams();
   console.log("ciiiiiiiiiiiiiii", titolo);
@@ -51,18 +52,43 @@ const SearchBar = ({ searchQuery }) => {
       <Row>
         {searchResults && searchResults.length > 0 ? (
           searchResults.map((animeList, index) => (
-            <Col key={index}>
-              <Figure className="figure">
-                <Figure.Image
-                  width={171}
-                  height={180}
-                  value={searchResults}
-                  alt={animeList.titolo || "Immagine"}
-                  src={animeList.immagine}
-                />
-                <Figure.Caption className="text-light">
-                  {animeList.titolo || "Nessun titolo"}
-                </Figure.Caption>
+            <Col key={index} className="divisore">
+              <Figure className="figure" style={{ display: "flex" }}>
+                <div className="blocco">
+                  <Figure.Image
+                    width={171}
+                    height={180}
+                    value={searchResults}
+                    alt={animeList.titolo || "Immagine"}
+                    src={animeList.immagine}
+                  />
+
+                  <Figure.Caption className="text-light">
+                    <h6> {animeList.titolo || "Nessun titolo"}</h6>
+                    <div className="bot">
+                      <Button
+                        variant="warning"
+                        type="submit"
+                        className="mb-3"
+                        onClick={() => {
+                          navigate(`/anime/edit/${animeList.id}`);
+                        }}
+                      >
+                        edit
+                      </Button>
+                    </div>
+                  </Figure.Caption>
+                </div>
+
+                <div className="blocco2">
+                  <Figure.Caption className="text-light">
+                    <h4>Trama</h4>
+                    {animeList.trama || "Nessuna trama"}.{""}
+                    <h5 style={{ marginTop: "7px" }}>Voto</h5>
+                    {animeList.voto || "Nessuna trama"}.
+                  </Figure.Caption>
+                </div>
+
                 <Alert show={error} variant="danger">
                   Ricerca fallita.
                 </Alert>
