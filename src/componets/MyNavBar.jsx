@@ -34,7 +34,14 @@ const MyNavBar = () => {
                 navigate("/chisono");
               }}
             >
-              Chi sono
+              <i className="bi bi-question-circle ad">Chi sono</i>
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/manga/add");
+              }}
+            >
+              <i className="bi bi-plus-circle-fill ad">Add</i>
             </Nav.Link>
           </Nav>
           <Nav>
@@ -43,7 +50,7 @@ const MyNavBar = () => {
                 navigate("/login");
               }}
             >
-              Accedi
+              <i className="bi bi-person-circle ad">Accedi</i>
             </Nav.Link>
           </Nav>
           <Form className="d-flex" onSubmit={handleSearch}>

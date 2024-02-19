@@ -13,6 +13,9 @@ import MangaMore from "./componets/MangaMore";
 import AnimeMore from "./componets/AnimeMore";
 import AnimeMod from "./componets/AnimeMod";
 import MangaMod from "./componets/MangaMod";
+import Post from "./componets/Post";
+import Delete from "./componets/Delete";
+import AnimeDelete from "./componets/AnimeDelete";
 
 function App() {
   return (
@@ -20,6 +23,7 @@ function App() {
       <BrowserRouter>
         <MyNavBar />
         <Routes>
+          <Route path="/manga/add" element={<Post />} />
           <Route path="/anime/edit/:id" element={<AnimeMod />} />
           <Route path="/manga/edit/:id" element={<MangaMod />} />
           <Route path="/anime/:id" element={<AnimeMore />} />
@@ -29,6 +33,8 @@ function App() {
           <Route path="/chisono" element={<ChiSiamo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="manga/delete/:id" element={<Delete />} />
+          <Route path="anime/delete/:id" element={<AnimeDelete />} />
         </Routes>
 
         <MyFooter />

@@ -38,7 +38,7 @@ const Anime = () => {
             anime.map((animeList, i) => {
               return (
                 <Link key={i} to={`/anime/${animeList.id}`}>
-                  <Figure className="figure">
+                  <Figure className="figure bi bi-bookmark-star ">
                     <Figure.Image
                       width={171}
                       height={180}
@@ -49,7 +49,8 @@ const Anime = () => {
                         )
                       }
                     />
-                    <Figure.Caption className="text-light">
+
+                    <Figure.Caption className="text-light ti ">
                       {animeList.titolo || (
                         <Spinner animation="border" variant="danger" />
                       )}

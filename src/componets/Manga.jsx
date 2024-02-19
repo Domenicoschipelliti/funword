@@ -38,7 +38,7 @@ const Manga = () => {
             manga.map((mangaList, i) => {
               return (
                 <Link key={i} to={`/manga/${mangaList.id}`}>
-                  <Figure className="figure" key={i}>
+                  <Figure className="figure bi bi-bookmark-star " key={i}>
                     <Figure.Image
                       width={171}
                       height={180}
@@ -46,7 +46,7 @@ const Manga = () => {
                       value={mangaList}
                       src={mangaList.immagine}
                     />
-                    <Figure.Caption className="text-light">
+                    <Figure.Caption className="text-light ti">
                       {mangaList.titolo}
                     </Figure.Caption>
                   </Figure>

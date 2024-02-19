@@ -50,7 +50,7 @@ const AnimeMore = () => {
                   className="figure"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  <div className="blocco">
+                  <div className="blocco bi bi-bookmark-star">
                     <Figure.Image
                       width={171}
                       height={180}
@@ -74,12 +74,22 @@ const AnimeMore = () => {
                   <Button
                     variant="warning"
                     type="submit"
-                    className="mb-3"
+                    className="mb-3 ma"
                     onClick={() => {
                       navigate(`/anime/edit/${idanime.id}`);
                     }}
                   >
                     edit
+                  </Button>
+                  <Button
+                    variant="danger"
+                    type="submit"
+                    className="mb-3"
+                    onClick={() => {
+                      navigate(`/anime/delete/${idanime.id}`);
+                    }}
+                  >
+                    delete
                   </Button>
                 </div>
               </Col>

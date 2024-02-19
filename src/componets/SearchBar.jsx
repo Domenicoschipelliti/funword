@@ -54,7 +54,7 @@ const SearchBar = ({ searchQuery }) => {
           searchResults.map((animeList, index) => (
             <Col key={index} className="divisore">
               <Figure className="figure" style={{ display: "flex" }}>
-                <div className="blocco">
+                <div className="blocco bi bi-bookmark-star">
                   <Figure.Image
                     width={171}
                     height={180}
@@ -69,12 +69,22 @@ const SearchBar = ({ searchQuery }) => {
                       <Button
                         variant="warning"
                         type="submit"
-                        className="mb-3"
+                        className="mb-3 ma"
                         onClick={() => {
                           navigate(`/anime/edit/${animeList.id}`);
                         }}
                       >
                         edit
+                      </Button>
+                      <Button
+                        variant="danger"
+                        type="submit"
+                        className="mb-3"
+                        onClick={() => {
+                          navigate(`/anime/delete/${animeList.id}`);
+                        }}
+                      >
+                        delete
                       </Button>
                     </div>
                   </Figure.Caption>

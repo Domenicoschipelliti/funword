@@ -65,9 +65,26 @@ body {
 
 .bot {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 .gi {
   color: white;
+}
+
+.ma {
+  margin-right: 8px;
+}
+
+.ad:hover {
+  color: coral;
+}
+.bi-bookmark-star::before {
+  position: absolute;
+  color: coral;
+  font-size: 20px;
+}
+
+.ti:hover {
+  color: coral !important;
 }
