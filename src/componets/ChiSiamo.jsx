@@ -8,7 +8,7 @@ const ChiSiamo = () => {
           <div
             className="modal show"
             style={{
-              display: "block",
+              display: "flex",
               position: "initial",
             }}
           >
@@ -70,7 +70,7 @@ const ChiSiamo = () => {
           <div
             className="modal show"
             style={{
-              display: "block",
+              display: "flex",
               position: "initial",
             }}
           >

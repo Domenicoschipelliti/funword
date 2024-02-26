@@ -16,6 +16,9 @@ import MangaMod from "./componets/MangaMod";
 import Post from "./componets/Post";
 import Delete from "./componets/Delete";
 import AnimeDelete from "./componets/AnimeDelete";
+import Comment from "./componets/Comment";
+import User from "./componets/User";
+import AllSearch from "./componets/AllSearch";
 
 function App() {
   return (
@@ -29,7 +32,7 @@ function App() {
           <Route path="/anime/:id" element={<AnimeMore />} />
           <Route path="/manga/:id" element={<MangaMore />} />
           <Route path="/" element={<Home />} />
-          <Route path="/anime/titolo" element={<SearchBar />} />
+          <Route path="/all/titolo" element={<AllSearch />} />
           <Route path="/chisono" element={<ChiSiamo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

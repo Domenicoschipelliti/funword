@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 const AnimeDelete = () => {
   const [del, setDel] = useState([]);
   const id = useParams();
-  const mangadelete = () => {
+  const [error, setError] = useState(false);
+  const animedelete = () => {
     fetch(`http://localhost:3001/anime/${id.id}`, {
       method: "DELETE",
       headers: {
@@ -18,6 +19,7 @@ const AnimeDelete = () => {
           console.log("id ", id);
           return res.json();
         } else {
+          setError(true);
           throw new Error("errore nella delete anime");
         }
       })
@@ -29,12 +31,18 @@ const AnimeDelete = () => {
       });
   };
   useEffect(() => {
-    mangadelete();
+    animedelete();
   }, [id]);
 
   return (
     <Container>
-      <Alert>Contenuto Eliminato</Alert>
+      {del && <Alert>Contenuto Eliminato</Alert>}
+
+      {error && (
+        <Alert show={error} variant="danger">
+          delete permessa solo agli admin
+        </Alert>
+      )}
     </Container>
   );
 };

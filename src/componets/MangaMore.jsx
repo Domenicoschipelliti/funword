@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Figure, Row, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Figure, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import Comment from "./Comment";
 
 const MangaMore = () => {
   const [result, setResult] = useState([]);
@@ -82,13 +83,14 @@ const MangaMore = () => {
                   <Button
                     variant="danger"
                     type="submit"
-                    className="mb-3"
+                    className="mb-3 ma"
                     onClick={() => {
                       navigate(`/manga/delete/${idmanga.id}`);
                     }}
                   >
                     delete
                   </Button>
+                  <Comment />
                 </div>
               </Col>
             );

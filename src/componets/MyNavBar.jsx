@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import User from "./User";
 
 const MyNavBar = () => {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ const MyNavBar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    navigate(`/anime/titolo?titolo=${searchQuery}`);
+    navigate(`/all/titolo?titolo=${searchQuery}`);
   };
 
   return (
@@ -50,9 +51,13 @@ const MyNavBar = () => {
                 navigate("/login");
               }}
             >
-              <i className="bi bi-person-circle ad">Accedi</i>
+              {/* <i className="bi bi-person-circle ad">Accedi</i> */}
+              <p className="ad toglima">
+                Benvenuto/a <User />
+              </p>
             </Nav.Link>
           </Nav>
+
           <Form className="d-flex" onSubmit={handleSearch}>
             <Form.Control
               type="search"

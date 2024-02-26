@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import User from "./User";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -58,6 +59,7 @@ const Login = () => {
             onSubmit={(e) => {
               e.preventDefault();
               setLogin();
+              <User />;
             }}
           >
             <Form.Group

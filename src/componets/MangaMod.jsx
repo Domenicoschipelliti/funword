@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
 const MangaMod = () => {
@@ -7,15 +7,22 @@ const MangaMod = () => {
   const [titolo, setTitolo] = useState("");
   const [trama, setTrama] = useState("");
   const [voto, setVoto] = useState("");
+  const [immagine, setImmagine] = useState("");
+  const [uploaded, setUploaded] = useState(false);
   const id = useParams();
   const navigate = useNavigate();
-  const bodyManga = {
-    titolo: titolo,
-    trama: trama,
-    voto: voto,
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const bodyManga = {
+      titolo: titolo,
+      trama: trama,
+      voto: voto,
+    };
 
-  const mod = () => {
+    mod(bodyManga);
+  };
+  const [error, setError] = useState(false);
+  const mod = (bodyManga) => {
     fetch(`http://localhost:3001/manga/${id.id}`, {
       method: "PUT",
       headers: {
@@ -30,77 +37,112 @@ const MangaMod = () => {
           console.log("id ", id);
           return res.json();
         } else {
-          throw new Error("errore nella get manga");
+          setError(true);
+          throw new Error("errore nella put manga");
         }
       })
       .then((res) => {
         console.log("ricerca completata ", res);
         setModifica([res]);
+        if (immagine) {
+          uploadImage([res.id]); // Passa l'id del manga al metodo uploadImage
+        } else {
+          setUploaded(true);
+        }
         console.log("setdopo ", res);
       })
       .catch((err) => {
         console.log("errore specififcato ", err);
       });
   };
+  const uploadImage = (mangaId) => {
+    const data = new FormData();
+    data.append("image", immagine);
+
+    fetch(`http://localhost:3001/manga/${mangaId}/upload`, {
+      method: "PATCH",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+        Accept: "application/json",
+      },
+      body: data,
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Immagine caricata con successo!");
+          setUploaded(true);
+        } else {
+          throw new Error("Errore durante il caricamento dell'immagine");
+        }
+      })
+      .catch((error) => {
+        console.error("Errore:", error);
+      });
+  };
+
   console.log("id ", id);
   console.log("idrisultato ", modifica);
   useEffect(() => {
-    mod();
-  }, [id]);
+    if (uploaded) {
+      navigate("/");
+    }
+  }, [uploaded, navigate]);
 
   return (
     <Container className="">
       <Row>
-        {modifica.map((mangamod) => {
-          return (
-            <Col key={mangamod.id}>
-              <Form
-                className="text-light"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  mod();
-                  navigate("/");
+        <Col>
+          <Form className="text-light" onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label> TITOLO:</Form.Label>
+              <Form.Control
+                type="text"
+                value={titolo}
+                onChange={(e) => {
+                  setTitolo(e.target.value);
                 }}
-              >
-                <Form.Group
-                  className="mb-3"
-                  onChange={(e) => {
-                    setTitolo(e.target.value);
-                  }}
-                >
-                  TITOLO:
-                  <Form.Label>{mangamod.titolo}</Form.Label>
-                  <Form.Control type="text" placeholder={mangamod.titolo} />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  onChange={(e) => {
-                    setTrama(e.target.value);
-                  }}
-                >
-                  TRAMA:
-                  <Form.Label>{mangamod.trama}</Form.Label>
-                  <Form.Control type="text" placeholder={mangamod.trama} />
-                </Form.Group>
-                <Form.Group
-                  className="mb-3"
-                  onChange={(e) => {
-                    setVoto(e.target.value);
-                  }}
-                >
-                  VOTO:
-                  <Form.Label>{mangamod.voto}</Form.Label>
-                  <Form.Control type="text" placeholder={mangamod.voto} />
-                </Form.Group>
-                <div className="di">
-                  <Button variant="warning" type="submit" className="mb-3">
-                    edit
-                  </Button>
-                </div>
-              </Form>
-            </Col>
-          );
-        })}
+                placeholder="titolo"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>TRAMA:</Form.Label>
+              <Form.Control
+                type="text"
+                value={trama}
+                onChange={(e) => {
+                  setTrama(e.target.value);
+                }}
+                placeholder="trama"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>VOTO:</Form.Label>
+              <Form.Control
+                type="text"
+                value={voto}
+                onChange={(e) => {
+                  setVoto(e.target.value);
+                }}
+                placeholder="Voto da 1 a 10"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>IMMAGINE:</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={(e) => setImmagine(e.target.files[0])}
+              />
+            </Form.Group>
+            <Alert show={error} variant="danger">
+              edit non autorizzata solo gli admin possono farla
+            </Alert>
+            <div className="di">
+              <Button variant="warning" type="submit" className="mb-3">
+                edit
+              </Button>
+            </div>
+          </Form>
+        </Col>
       </Row>
     </Container>
   );

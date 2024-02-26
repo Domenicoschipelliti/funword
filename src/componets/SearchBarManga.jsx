@@ -3,7 +3,7 @@ import { Alert, Button, Col, Container, Figure, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 
-const SearchBar = ({ searchQuery }) => {
+const SearchBarManga = ({ searchQuery }) => {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();
@@ -15,7 +15,7 @@ const SearchBar = ({ searchQuery }) => {
   console.log("ciiiiiiiiiiiiiii", titolo);
   console.log(searchResults);
   const Ricerca = () => {
-    fetch(`http://localhost:3001/anime/titolo?titolo=${titolo}`, {
+    fetch(`http://localhost:3001/manga/titolo?titolo=${titolo}`, {
       headers: {
         Authorization: localStorage.getItem("accessToken"),
       },
@@ -52,7 +52,7 @@ const SearchBar = ({ searchQuery }) => {
     <Container>
       <Row>
         {searchResults && searchResults.length > 0 ? (
-          searchResults.map((animeList, index) => (
+          searchResults.map((mangaList, index) => (
             <Col key={index}>
               <Figure
                 className="figure"
@@ -63,21 +63,21 @@ const SearchBar = ({ searchQuery }) => {
                     width={171}
                     height={180}
                     value={searchResults}
-                    alt={animeList.titolo || "Immagine"}
-                    src={animeList.immagine}
+                    alt={mangaList.titolo || "Immagine"}
+                    src={mangaList.immagine}
                   />
 
                   <Figure.Caption className="text-light">
-                    <h6> {animeList.titolo || "Nessun titolo"}</h6>
+                    <h6> {mangaList.titolo || "Nessun titolo"}</h6>
                   </Figure.Caption>
                 </div>
 
                 <div className="blocco2">
                   <Figure.Caption className="text-light">
                     <h4>Trama</h4>
-                    {animeList.trama || "Nessuna trama"}.{""}
+                    {mangaList.trama || "Nessuna trama"}.{""}
                     <h5 style={{ marginTop: "7px" }}>Voto</h5>
-                    {animeList.voto || "Nessuna trama"}.
+                    {mangaList.voto || "Nessuna trama"}.
                   </Figure.Caption>
                 </div>
 
@@ -91,7 +91,7 @@ const SearchBar = ({ searchQuery }) => {
                   type="submit"
                   className="mb-3 ma"
                   onClick={() => {
-                    navigate(`/anime/edit/${animeList.id}`);
+                    navigate(`/anime/edit/${mangaList.id}`);
                   }}
                 >
                   edit
@@ -101,7 +101,7 @@ const SearchBar = ({ searchQuery }) => {
                   type="submit"
                   className="mb-3 ma"
                   onClick={() => {
-                    navigate(`/anime/delete/${animeList.id}`);
+                    navigate(`/anime/delete/${mangaList.id}`);
                   }}
                 >
                   delete
@@ -112,11 +112,11 @@ const SearchBar = ({ searchQuery }) => {
           ))
         ) : (
           <Col className="divisore">
-            <p className="text-light ">Nessun anime trovato.</p>
+            <p className="text-light ">Nessun manga trovato.</p>
           </Col>
         )}
       </Row>
     </Container>
   );
 };
-export default SearchBar;
+export default SearchBarManga;

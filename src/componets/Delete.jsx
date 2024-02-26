@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const Delete = () => {
   const [del, setDel] = useState([]);
   const id = useParams();
+  const [error, setError] = useState(false);
   const mangadelete = () => {
     fetch(`http://localhost:3001/manga/${id.id}`, {
       method: "DELETE",
@@ -18,6 +19,7 @@ const Delete = () => {
           console.log("id ", id);
           return res.json();
         } else {
+          setError(true);
           throw new Error("errore nella delete manga");
         }
       })
@@ -31,10 +33,19 @@ const Delete = () => {
   useEffect(() => {
     mangadelete();
   }, [id]);
-
+  console.log(error);
   return (
     <Container>
-      <Alert>Contenuto Eliminato</Alert>
+      <Row>
+        {/* {error ? (
+          <Alert show={error} variant="danger">
+            Delete permessa solo agli admin
+          </Alert>
+        ) : (
+          del && <Alert>Contenuto Eliminato</Alert>
+        )} */}
+        <Alert>Contenuto Eliminato</Alert>
+      </Row>
     </Container>
   );
 };

@@ -29,6 +29,7 @@ const Anime = () => {
   useEffect(() => {
     MyAnime();
   }, []);
+  // <i className="bi bi-bookmark-star-fill"></i>;
   return (
     <Container>
       <Row>
@@ -38,17 +39,23 @@ const Anime = () => {
             anime.map((animeList, i) => {
               return (
                 <Link key={i} to={`/anime/${animeList.id}`}>
-                  <Figure className="figure bi bi-bookmark-star ">
-                    <Figure.Image
-                      width={171}
-                      height={180}
-                      alt="171x180"
-                      src={
-                        animeList.immagine || (
-                          <Spinner animation="border" variant="danger" />
-                        )
-                      }
-                    />
+                  <Figure className="figure">
+                    <div>
+                      <div className="d-flex">
+                        <i className="bi bi-bookmark-star"></i>
+                      </div>
+
+                      <Figure.Image
+                        width={173}
+                        height={178}
+                        alt="171x180"
+                        src={
+                          animeList.immagine || (
+                            <Spinner animation="border" variant="danger" />
+                          )
+                        }
+                      />
+                    </div>
 
                     <Figure.Caption className="text-light ti ">
                       {animeList.titolo || (
