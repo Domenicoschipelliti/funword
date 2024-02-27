@@ -62,8 +62,9 @@ const MyNavBar = () => {
             <Form.Control
               type="search"
               placeholder="Search"
-              className="me-2"
+              className="me-2 barra"
               aria-label="Search"
+              variant="outline-danger"
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);

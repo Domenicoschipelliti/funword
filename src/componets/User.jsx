@@ -25,8 +25,10 @@ const User = () => {
       });
   };
   useEffect(() => {
-    Subuser();
-  }, []);
+    if (utente) {
+      Subuser();
+    }
+  }, [utente]);
 
   return (
     <Container>

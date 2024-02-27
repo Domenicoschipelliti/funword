@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./componets/Home";
 import MyNavBar from "./componets/MyNavBar";
 import MyFooter from "./componets/MyFoteer";
-import SearchBar from "./componets/SearchBar";
 import ChiSiamo from "./componets/ChiSiamo";
 import Login from "./componets/Login";
 import Register from "./componets/Register";
@@ -14,9 +13,6 @@ import AnimeMore from "./componets/AnimeMore";
 import AnimeMod from "./componets/AnimeMod";
 import MangaMod from "./componets/MangaMod";
 import Post from "./componets/Post";
-
-import Comment from "./componets/Comment";
-import User from "./componets/User";
 import AllSearch from "./componets/AllSearch";
 
 function App() {

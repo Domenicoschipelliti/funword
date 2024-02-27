@@ -117,3 +117,12 @@ body {
   display: flex;
   margin-bottom: 0px;
 }
+
+.barra {
+  border-color: black !important;
+  box-shadow: none !important;
+}
+
+.barra:focus {
+  border-color: #dc3545 !important;
+}
