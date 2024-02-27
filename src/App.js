@@ -14,8 +14,7 @@ import AnimeMore from "./componets/AnimeMore";
 import AnimeMod from "./componets/AnimeMod";
 import MangaMod from "./componets/MangaMod";
 import Post from "./componets/Post";
-import Delete from "./componets/Delete";
-import AnimeDelete from "./componets/AnimeDelete";
+
 import Comment from "./componets/Comment";
 import User from "./componets/User";
 import AllSearch from "./componets/AllSearch";
@@ -36,8 +35,6 @@ function App() {
           <Route path="/chisono" element={<ChiSiamo />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="manga/delete/:id" element={<Delete />} />
-          <Route path="anime/delete/:id" element={<AnimeDelete />} />
         </Routes>
 
         <MyFooter />

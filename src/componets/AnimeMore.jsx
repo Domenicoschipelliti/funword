@@ -7,6 +7,7 @@ const AnimeMore = () => {
   const [result, setResult] = useState([]);
 
   const id = useParams();
+  const [del, setDel] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,11 +35,33 @@ const AnimeMore = () => {
         console.log("errore specififcato ", err);
       });
   };
+
+  const animedelete = () => {
+    fetch(`http://localhost:3001/anime/${id.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+      "Content-Type": "application/json",
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("id ", id);
+          setDel(true);
+        } else {
+          throw new Error("errore nella delete anime");
+        }
+      })
+
+      .catch((err) => {
+        console.log("errore specififcato ", err);
+      });
+  };
   console.log("id ", id);
   console.log("idrisultato ", result);
   useEffect(() => {
     man();
-  }, [id]);
+  }, [id, del]);
 
   return (
     <Container>
@@ -87,7 +110,10 @@ const AnimeMore = () => {
                     type="submit"
                     className="mb-3 ma"
                     onClick={() => {
-                      navigate(`/anime/delete/${idanime.id}`);
+                      animedelete();
+                      setTimeout(() => {
+                        navigate("/");
+                      }, 500);
                     }}
                   >
                     delete

@@ -5,6 +5,7 @@ import Comment from "./Comment";
 
 const MangaMore = () => {
   const [result, setResult] = useState([]);
+  const [del, setDel] = useState(false);
 
   const id = useParams();
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const MangaMore = () => {
       .then((res) => {
         if (res.ok) {
           console.log("ecco qua ", res);
-          console.log("id ", id);
+
           return res.json();
         } else {
           throw new Error("errore nella get manga");
@@ -32,11 +33,31 @@ const MangaMore = () => {
         console.log("errore specififcato ", err);
       });
   };
+  const mangadelete = () => {
+    fetch(`http://localhost:3001/manga/${id.id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+      "Content-Type": "application/json",
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log(res, "eliminato");
+          setDel(true);
+        } else {
+          throw new Error("Errore durante l'eliminazione");
+        }
+      })
+      .catch((err) => {
+        console.log("errore specififcato ", err);
+      });
+  };
   console.log("id ", id);
   console.log("idrisultato ", result);
   useEffect(() => {
     man();
-  }, [id]);
+  }, [id, del]);
 
   return (
     <Container>
@@ -85,7 +106,10 @@ const MangaMore = () => {
                     type="submit"
                     className="mb-3 ma"
                     onClick={() => {
-                      navigate(`/manga/delete/${idmanga.id}`);
+                      mangadelete();
+                      setTimeout(() => {
+                        navigate("/");
+                      }, 500);
                     }}
                   >
                     delete
