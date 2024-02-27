@@ -57,6 +57,7 @@ const MangaMore = () => {
   console.log("idrisultato ", result);
   useEffect(() => {
     man();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, del]);
 
   return (

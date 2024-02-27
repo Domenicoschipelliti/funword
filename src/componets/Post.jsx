@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Post = () => {
   const [titolo, setTitolo] = useState("");
@@ -8,7 +8,7 @@ const Post = () => {
   const [voto, setVoto] = useState("");
   const [immagine, setImmagine] = useState("");
   const [uploaded, setUploaded] = useState(false);
-  const id = useParams();
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
