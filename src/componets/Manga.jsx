@@ -46,6 +46,7 @@ const Manga = () => {
                       <Figure.Image
                         width={173}
                         height={180}
+                        className="fi"
                         alt="171x180"
                         value={mangaList}
                         src={mangaList.immagine}

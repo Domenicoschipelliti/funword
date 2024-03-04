@@ -79,6 +79,7 @@ body {
 .ad:hover {
   color: coral;
 }
+
 .bi-bookmark-star::before {
   position: absolute;
   color: coral;
@@ -125,4 +126,38 @@ body {
 
 .barra:focus {
   border-color: #dc3545 !important;
+}
+
+.fi:hover {
+  border-radius: 30px !important;
+}
+
+.but {
+  background-color: unset !important;
+  color: white !important;
+}
+
+.but:hover {
+  background-color: #ffc107 !important;
+  color: black !important;
+}
+
+.button {
+  background-color: unset !important;
+  color: white !important;
+}
+
+.button:hover {
+  background-color: #dc3545 !important ;
+  color: black !important;
+}
+
+.come {
+  background-color: unset !important;
+  color: white !important;
+}
+
+.come:hover {
+  background-color: #0d6efd !important;
+  color: black !important;
 }

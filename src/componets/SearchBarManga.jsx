@@ -89,7 +89,7 @@ const SearchBarManga = ({ searchQuery }) => {
                 <Button
                   variant="warning"
                   type="submit"
-                  className="mb-3 ma"
+                  className="mb-3 ma but"
                   onClick={() => {
                     navigate(`/anime/edit/${mangaList.id}`);
                   }}
@@ -99,7 +99,7 @@ const SearchBarManga = ({ searchQuery }) => {
                 <Button
                   variant="danger"
                   type="submit"
-                  className="mb-3 ma"
+                  className="mb-3 ma button"
                   onClick={() => {
                     navigate(`/anime/delete/${mangaList.id}`);
                   }}

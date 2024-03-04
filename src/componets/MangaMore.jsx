@@ -95,7 +95,7 @@ const MangaMore = () => {
                   <Button
                     variant="warning"
                     type="submit"
-                    className="mb-3 ma"
+                    className="mb-3 ma but"
                     onClick={() => {
                       navigate(`/manga/edit/${idmanga.id}`);
                     }}
@@ -105,7 +105,7 @@ const MangaMore = () => {
                   <Button
                     variant="danger"
                     type="submit"
-                    className="mb-3 ma"
+                    className="mb-3 ma button"
                     onClick={() => {
                       mangadelete();
                       setTimeout(() => {

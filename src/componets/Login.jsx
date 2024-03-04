@@ -26,7 +26,10 @@ const Login = () => {
     })
       .then((res) => {
         if (res.ok) {
-          navigate("/");
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+
           return res.json();
         } else {
           setError(true);
@@ -64,7 +67,6 @@ const Login = () => {
           >
             <Form.Group
               className="mb-3"
-              controlId="formBasicEmail"
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -75,7 +77,6 @@ const Login = () => {
 
             <Form.Group
               className="mb-3"
-              controlId="formBasicPassword"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}

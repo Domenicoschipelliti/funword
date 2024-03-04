@@ -49,6 +49,7 @@ const Anime = () => {
                         width={173}
                         height={178}
                         alt="171x180"
+                        className="fi"
                         src={
                           animeList.immagine || (
                             <Spinner animation="border" variant="danger" />

@@ -67,7 +67,7 @@ const Comment = () => {
   console.log("com ", com);
   return (
     <>
-      <Button variant="primary" onClick={handleShow} className="me-2 bu">
+      <Button variant="primary" onClick={handleShow} className="me-2 bu come">
         Commenti
       </Button>
       {com &&
@@ -107,7 +107,9 @@ const Comment = () => {
                     <Form.Control as="textarea" rows={3} />
                   </Form.Group>
                   <div className="divisore">
-                    <Button type="submit">Pubblica</Button>
+                    <Button type="submit" className="come">
+                      Pubblica
+                    </Button>
                   </div>
                 </Form>
               </Offcanvas.Body>

@@ -19,16 +19,15 @@ const User = () => {
       })
       .then((res) => {
         setUtente([res]);
+        console.log("utente2 ", utente);
       })
       .catch((err) => {
         throw new Error("errore nella get utente ", err);
       });
   };
   useEffect(() => {
-    if (utente) {
-      Subuser();
-    }
-  }, [utente]);
+    Subuser();
+  }, [localStorage.getItem("accessToken")]);
 
   return (
     <Container>

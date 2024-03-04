@@ -99,7 +99,7 @@ const AnimeMore = () => {
                   <Button
                     variant="warning"
                     type="submit"
-                    className="mb-3 ma"
+                    className="mb-3 ma but"
                     onClick={() => {
                       navigate(`/anime/edit/${idanime.id}`);
                     }}
@@ -109,7 +109,7 @@ const AnimeMore = () => {
                   <Button
                     variant="danger"
                     type="submit"
-                    className="mb-3 ma"
+                    className="mb-3 ma button"
                     onClick={() => {
                       animedelete();
                       setTimeout(() => {
