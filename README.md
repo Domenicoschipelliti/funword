@@ -1,70 +1,8 @@
-# Getting Started with Create React App
+Buongiorno sono Domenico Schipelliti ,sono un ragazzo di 21 anni che sta finendo il percorso con Epicode. Visto che mi piacciono gli anime, voglio fare una cosa simile a Myanimelist ovvero liste di anime/manga nella quale si può visualizzare l'indice di gradimento nelle categorie apposite e anche poterle creare da un form da parte dell'utente e tutto questo verrà organizzato in React con eventuali icone e stili prese da Bootstrap. Ovviamente verranno precedute da una parte di register e login che comunicherà con il database PostgreSQL usando Java.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Front-End:
 
-## Available Scripts
+Per il Front-End quando copierete il programma fatto con react-app bisogna installare i node_modules ma prima bisogna avere installato npm per fare i comandi e in caso lascio il loro sito per le informazioni: https://docs.npmjs.com/about-npm . Successivamente si devono installare i moduli facendo il comando npm install node_modules e lui farà da se installando tutte le funzionalità/librerie che servono per il progetto. Dopo aver fatto questo di puo iniziare con il comando npm start che farà avviare il sistema.
+#Nota: Il front-end sarebbe meglio averlo avviato dopo il back così hai i dati e le chamate API già disponibili.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Da ciò per ulteriori istruzioni sul Back-End lascio qui la read-me: https://github.com/Domenicoschipelliti/FunWorld/tree/main/FunWorld . 
