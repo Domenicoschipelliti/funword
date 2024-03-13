@@ -5,6 +5,7 @@ import Comment from "./Comment";
 
 const SearchBarManga = ({ searchQuery }) => {
   const [searchResults, setSearchResults] = useState([]);
+  const [utente, setUtente] = useState([]);
   const [error, setError] = useState(false);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -14,6 +15,32 @@ const SearchBarManga = ({ searchQuery }) => {
   // const { titolo } = useParams();
   console.log("ciiiiiiiiiiiiiii", titolo);
   console.log(searchResults);
+
+  const Subuser = () => {
+    fetch(`http://localhost:3001/users/me`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("utente ", res);
+          return res.json();
+        }
+      })
+      .then((res) => {
+        setUtente([res]);
+        console.log("utente2 ", utente);
+      })
+      .catch((err) => {
+        throw new Error("errore nella get utente ", err);
+      });
+  };
+  useEffect(() => {
+    Subuser();
+  }, [localStorage.getItem("accessToken")]);
+
   const Ricerca = () => {
     fetch(`http://localhost:3001/manga/titolo?titolo=${titolo}`, {
       headers: {
@@ -42,6 +69,7 @@ const SearchBarManga = ({ searchQuery }) => {
   useEffect(() => {
     Ricerca();
   }, [titolo]);
+
   console.log("titolo ", titolo);
   const ricerca = searchResults;
   console.log(ricerca);
@@ -86,26 +114,36 @@ const SearchBarManga = ({ searchQuery }) => {
                 </Alert>
               </Figure>
               <div className="bot">
-                <Button
-                  variant="warning"
-                  type="submit"
-                  className="mb-3 ma but"
-                  onClick={() => {
-                    navigate(`/anime/edit/${mangaList.id}`);
-                  }}
-                >
-                  edit
-                </Button>
-                <Button
-                  variant="danger"
-                  type="submit"
-                  className="mb-3 ma button"
-                  onClick={() => {
-                    navigate(`/anime/delete/${mangaList.id}`);
-                  }}
-                >
-                  delete
-                </Button>
+                {utente &&
+                  utente.map((ricercaManga) => {
+                    return (
+                      ricercaManga.role === "ADMIN" && (
+                        <>
+                          <Button
+                            variant="warning"
+                            type="submit"
+                            className="mb-3 ma but"
+                            onClick={() => {
+                              navigate(`/anime/edit/${mangaList.id}`);
+                            }}
+                          >
+                            edit
+                          </Button>
+                          <Button
+                            variant="danger"
+                            type="submit"
+                            className="mb-3 ma button"
+                            onClick={() => {
+                              navigate(`/anime/delete/${mangaList.id}`);
+                            }}
+                          >
+                            delete
+                          </Button>
+                        </>
+                      )
+                    );
+                  })}
+
                 <Comment />
               </div>
             </Col>

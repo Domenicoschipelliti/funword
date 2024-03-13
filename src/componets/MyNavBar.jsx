@@ -5,6 +5,7 @@ import User from "./User";
 
 const MyNavBar = () => {
   const navigate = useNavigate();
+  const [utente, setUtente] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -12,6 +13,31 @@ const MyNavBar = () => {
     e.preventDefault();
     navigate(`/all/titolo?titolo=${searchQuery}`);
   };
+
+  const Subuser = () => {
+    fetch(`http://localhost:3001/users/me`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("utente ", res);
+          return res.json();
+        }
+      })
+      .then((res) => {
+        setUtente([res]);
+        console.log("utente2 ", utente);
+      })
+      .catch((err) => {
+        throw new Error("errore nella get utente ", err);
+      });
+  };
+  useEffect(() => {
+    Subuser();
+  }, [localStorage.getItem("accessToken")]);
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="black" data-bs-theme="dark">
@@ -37,13 +63,20 @@ const MyNavBar = () => {
             >
               <i className="bi bi-question-circle ad">Chi sono</i>
             </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("/manga/add");
-              }}
-            >
-              <i className="bi bi-plus-circle-fill ad">Add</i>
-            </Nav.Link>
+            {utente &&
+              utente.map((ut) => {
+                return (
+                  ut.role === "ADMIN" && (
+                    <Nav.Link
+                      onClick={() => {
+                        navigate("/manga/add");
+                      }}
+                    >
+                      <i className="bi bi-plus-circle-fill ad">Add</i>
+                    </Nav.Link>
+                  )
+                );
+              })}
           </Nav>
           <Nav>
             <Nav.Link

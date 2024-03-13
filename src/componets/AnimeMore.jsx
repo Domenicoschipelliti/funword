@@ -5,11 +5,35 @@ import Comment from "./Comment";
 
 const AnimeMore = () => {
   const [result, setResult] = useState([]);
-
+  const [utente, setUtente] = useState([]);
   const id = useParams();
   const [del, setDel] = useState(false);
-
   const navigate = useNavigate();
+
+  const Subuser = () => {
+    fetch(`http://localhost:3001/users/me`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("utente ", res);
+          return res.json();
+        }
+      })
+      .then((res) => {
+        setUtente([res]);
+        console.log("utente2 ", utente);
+      })
+      .catch((err) => {
+        throw new Error("errore nella get utente ", err);
+      });
+  };
+  useEffect(() => {
+    Subuser();
+  }, [localStorage.getItem("accessToken")]);
 
   const man = () => {
     fetch(`http://localhost:3001/anime/${id.id}`, {
@@ -96,29 +120,39 @@ const AnimeMore = () => {
                   </div>
                 </Figure>
                 <div className="bot">
-                  <Button
-                    variant="warning"
-                    type="submit"
-                    className="mb-3 ma but"
-                    onClick={() => {
-                      navigate(`/anime/edit/${idanime.id}`);
-                    }}
-                  >
-                    edit
-                  </Button>
-                  <Button
-                    variant="danger"
-                    type="submit"
-                    className="mb-3 ma button"
-                    onClick={() => {
-                      animedelete();
-                      setTimeout(() => {
-                        navigate("/");
-                      }, 500);
-                    }}
-                  >
-                    delete
-                  </Button>
+                  {utente &&
+                    utente.map((user) => {
+                      return (
+                        user.role === "ADMIN" && (
+                          <>
+                            <Button
+                              variant="warning"
+                              type="submit"
+                              className="mb-3 ma but"
+                              onClick={() => {
+                                navigate(`/anime/edit/${idanime.id}`);
+                              }}
+                            >
+                              edit
+                            </Button>
+                            <Button
+                              variant="danger"
+                              type="submit"
+                              className="mb-3 ma button"
+                              onClick={() => {
+                                animedelete();
+                                setTimeout(() => {
+                                  navigate("/");
+                                }, 500);
+                              }}
+                            >
+                              delete
+                            </Button>
+                          </>
+                        )
+                      );
+                    })}
+
                   <Comment />
                 </div>
               </Col>

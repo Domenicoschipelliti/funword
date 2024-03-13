@@ -5,10 +5,37 @@ import Comment from "./Comment";
 
 const MangaMore = () => {
   const [result, setResult] = useState([]);
+  const [utente, setUtente] = useState([]);
   const [del, setDel] = useState(false);
 
   const id = useParams();
   const navigate = useNavigate();
+
+  const Subuser = () => {
+    fetch(`http://localhost:3001/users/me`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("utente ", res);
+          return res.json();
+        }
+      })
+      .then((res) => {
+        setUtente([res]);
+        console.log("utente2 ", utente);
+      })
+      .catch((err) => {
+        throw new Error("errore nella get utente ", err);
+      });
+  };
+  useEffect(() => {
+    Subuser();
+  }, [localStorage.getItem("accessToken")]);
+
   const man = () => {
     fetch(`http://localhost:3001/manga/${id.id}`, {
       headers: {
@@ -92,29 +119,39 @@ const MangaMore = () => {
                   </div>
                 </Figure>
                 <div className="bot">
-                  <Button
-                    variant="warning"
-                    type="submit"
-                    className="mb-3 ma but"
-                    onClick={() => {
-                      navigate(`/manga/edit/${idmanga.id}`);
-                    }}
-                  >
-                    edit
-                  </Button>
-                  <Button
-                    variant="danger"
-                    type="submit"
-                    className="mb-3 ma button"
-                    onClick={() => {
-                      mangadelete();
-                      setTimeout(() => {
-                        navigate("/");
-                      }, 500);
-                    }}
-                  >
-                    delete
-                  </Button>
+                  {utente &&
+                    utente.map((user) => {
+                      return (
+                        user.role === "ADMIN" && (
+                          <>
+                            <Button
+                              variant="warning"
+                              type="submit"
+                              className="mb-3 ma but"
+                              onClick={() => {
+                                navigate(`/manga/edit/${idmanga.id}`);
+                              }}
+                            >
+                              edit
+                            </Button>
+                            <Button
+                              variant="danger"
+                              type="submit"
+                              className="mb-3 ma button"
+                              onClick={() => {
+                                mangadelete();
+                                setTimeout(() => {
+                                  navigate("/");
+                                }, 500);
+                              }}
+                            >
+                              delete
+                            </Button>
+                          </>
+                        )
+                      );
+                    })}
+
                   <Comment />
                 </div>
               </Col>
