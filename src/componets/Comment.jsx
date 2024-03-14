@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Offcanvas } from "react-bootstrap";
+import User from "./User";
 
 const Comment = () => {
   const [show, setShow] = useState(false);
@@ -53,7 +54,8 @@ const Comment = () => {
       })
       .then((res) => {
         console.log("ricerca completata ", res);
-        setMessaggio([res]);
+        setMessaggio("");
+        Getmess();
         console.log("setdopo ", res);
       })
       .catch((err) => {
@@ -65,57 +67,60 @@ const Comment = () => {
   }, [messaggio]);
   console.log("mess ", messaggio);
   console.log("com ", com);
+
   return (
     <>
       <Button variant="primary" onClick={handleShow} className="me-2 bu come">
-        Commenti
+        <i className="bi bi-chat-fill">commenta</i>
       </Button>
-      {com &&
-        com.map((co, i) => {
-          return (
-            <Offcanvas
-              show={show}
-              onHide={handleClose}
-              className="com text-light"
-              placement="end"
-              key={i}
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        className="com text-light"
+        placement="end"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Commenti</Offcanvas.Title>
+        </Offcanvas.Header>
+
+        <Offcanvas.Body>
+          {com.map((co, i) => (
+            <div key={i} className="d-flex">
+              <p className="d-flex">
+                <div>
+                  <User />
+                </div>
+                <div className="d-flex">{co.messaggio}</div>
+              </p>
+            </div>
+          ))}
+
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              Posmessage();
+            }}
+          >
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
             >
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Commenti</Offcanvas.Title>
-              </Offcanvas.Header>
-
-              <Offcanvas.Header>
-                <p>Com: {co.messaggio}</p>
-              </Offcanvas.Header>
-
-              <Offcanvas.Body>
-                <Form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    Posmessage();
-                    Getmess();
-                  }}
-                >
-                  <Form.Group
-                    className="mb-3"
-                    controlId="exampleForm.ControlTextarea1"
-                    onChange={(e) => {
-                      setMessaggio(e.target.value);
-                    }}
-                  >
-                    <Form.Label>Commenta</Form.Label>
-                    <Form.Control as="textarea" rows={3} />
-                  </Form.Group>
-                  <div className="divisore">
-                    <Button type="submit" className="come">
-                      Pubblica
-                    </Button>
-                  </div>
-                </Form>
-              </Offcanvas.Body>
-            </Offcanvas>
-          );
-        })}
+              <Form.Label>Commenta</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                value={messaggio}
+                onChange={(e) => setMessaggio(e.target.value)}
+              />
+            </Form.Group>
+            <div className="divisore">
+              <Button type="submit" className="come">
+                Pubblica
+              </Button>
+            </div>
+          </Form>
+        </Offcanvas.Body>
+      </Offcanvas>
     </>
   );
 };

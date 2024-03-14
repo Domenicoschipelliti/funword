@@ -127,7 +127,7 @@ const SearchBarManga = ({ searchQuery }) => {
                               navigate(`/anime/edit/${mangaList.id}`);
                             }}
                           >
-                            edit
+                            <i class="bi bi-pencil-square">edit</i>
                           </Button>
                           <Button
                             variant="danger"
@@ -137,7 +137,7 @@ const SearchBarManga = ({ searchQuery }) => {
                               navigate(`/anime/delete/${mangaList.id}`);
                             }}
                           >
-                            delete
+                            <i class="bi bi-trash3-fill">delete</i>
                           </Button>
                         </>
                       )

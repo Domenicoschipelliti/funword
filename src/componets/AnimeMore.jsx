@@ -133,7 +133,7 @@ const AnimeMore = () => {
                                 navigate(`/anime/edit/${idanime.id}`);
                               }}
                             >
-                              edit
+                              <i class="bi bi-pencil-square">edit</i>
                             </Button>
                             <Button
                               variant="danger"
@@ -146,7 +146,7 @@ const AnimeMore = () => {
                                 }, 500);
                               }}
                             >
-                              delete
+                              <i class="bi bi-trash3-fill">delete</i>
                             </Button>
                           </>
                         )
