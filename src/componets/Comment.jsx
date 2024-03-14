@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { Button, Form, Offcanvas } from "react-bootstrap";
 import User from "./User";
 
-const Comment = () => {
+const Comment = ({ idMessaggio }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [del, setDel] = useState(false);
   const [com, setCom] = useState([]);
+  const [utente, setUtente] = useState([]);
   const [messaggio, setMessaggio] = useState("");
 
   const bodyMessage = {
@@ -34,6 +36,30 @@ const Comment = () => {
         throw new Error("errore nella get commenti ", err);
       });
   };
+  const Subuser = () => {
+    fetch(`http://localhost:3001/users/me`, {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("utente ", res);
+          return res.json();
+        }
+      })
+      .then((res) => {
+        setUtente([res]);
+        console.log("utente2 ", utente);
+      })
+      .catch((err) => {
+        throw new Error("errore nella get utente ", err);
+      });
+  };
+  useEffect(() => {
+    Subuser();
+  }, [localStorage.getItem("accessToken")]);
   const Posmessage = () => {
     fetch(`http://localhost:3001/commenti`, {
       method: "POST",
@@ -62,9 +88,32 @@ const Comment = () => {
         console.log("errore specififcato ", err);
       });
   };
+  const commentdelete = (commentId) => {
+    fetch(`http://localhost:3001/commenti/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("accessToken"),
+      },
+      "Content-Type": "application/json",
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("id ", idMessaggio);
+          setCom(com.filter((comment) => comment.idMessaggio !== commentId));
+          setDel(true);
+        } else {
+          throw new Error("errore nella delete commenti");
+        }
+      })
+
+      .catch((err) => {
+        console.log("errore specififcato ", err);
+      });
+  };
+
   useEffect(() => {
     Getmess();
-  }, [messaggio]);
+  }, [messaggio, del, idMessaggio]);
   console.log("mess ", messaggio);
   console.log("com ", com);
 
@@ -83,15 +132,32 @@ const Comment = () => {
           <Offcanvas.Title>Commenti</Offcanvas.Title>
         </Offcanvas.Header>
 
-        <Offcanvas.Body>
-          {com.map((co, i) => (
-            <div key={i} className="d-flex">
+        <Offcanvas.Body className="colu">
+          {com.map((co) => (
+            <div key={co.idMessaggio} className="d-flex comme">
               <p className="d-flex">
                 <div>
                   <User />
                 </div>
-                <div className="d-flex">{co.messaggio}</div>
+                <div>{co.messaggio} </div>
               </p>
+              <div className="d-flex">
+                {utente &&
+                  utente.map((commentUser) => {
+                    return (
+                      commentUser.role === "ADMIN" && (
+                        <div className="d-flex">
+                          <i
+                            class="bi bi-trash3"
+                            onClick={() => {
+                              commentdelete(co.idMessaggio);
+                            }}
+                          ></i>
+                        </div>
+                      )
+                    );
+                  })}
+              </div>
             </div>
           ))}
 

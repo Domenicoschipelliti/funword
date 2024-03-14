@@ -172,3 +172,12 @@ body {
 .bi-chat-fill::before {
   padding-right: 4px;
 }
+
+.colu {
+  display: flex;
+  flex-direction: column;
+}
+
+.comme {
+  justify-content: space-between;
+}
