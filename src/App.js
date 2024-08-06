@@ -3,7 +3,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Home from "./componets/Home";
-import MyNavBar from "./componets/MyNavBar";
 import MyFooter from "./componets/MyFoteer";
 import ChiSiamo from "./componets/ChiSiamo";
 import Login from "./componets/Login";
