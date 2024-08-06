@@ -19,17 +19,16 @@ function App() {
   return (
     <body className="App">
       <BrowserRouter>
-        <MyNavBar />
         <Routes>
           <Route path="/manga/add" element={<Post />} />
           <Route path="/anime/edit/:id" element={<AnimeMod />} />
           <Route path="/manga/edit/:id" element={<MangaMod />} />
           <Route path="/anime/:id" element={<AnimeMore />} />
           <Route path="/manga/:id" element={<MangaMore />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/all/titolo" element={<AllSearch />} />
           <Route path="/chisono" element={<ChiSiamo />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
 

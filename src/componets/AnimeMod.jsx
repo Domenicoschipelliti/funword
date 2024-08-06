@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import MyNavBar from "./MyNavBar";
 
 const AnimeMod = () => {
   const [modifica, setModifica] = useState([]);
@@ -89,62 +90,65 @@ const AnimeMod = () => {
   }, [uploaded, navigate]);
 
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Form className="text-light" onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label> TITOLO:</Form.Label>
-              <Form.Control
-                type="text"
-                value={titolo}
-                onChange={(e) => {
-                  setTitolo(e.target.value);
-                }}
-                placeholder="titolo"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>TRAMA:</Form.Label>
-              <Form.Control
-                type="text"
-                value={trama}
-                onChange={(e) => {
-                  setTrama(e.target.value);
-                }}
-                placeholder="trama"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>VOTO:</Form.Label>
-              <Form.Control
-                type="text"
-                value={voto}
-                onChange={(e) => {
-                  setVoto(e.target.value);
-                }}
-                placeholder="Voto da 1 a 10"
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>IMMAGINE:</Form.Label>
-              <Form.Control
-                type="file"
-                onChange={(e) => setImmagine(e.target.files[0])}
-              />
-            </Form.Group>
-            <Alert show={error} variant="danger">
-              edit non autorizzata solo gli admin possono farla
-            </Alert>
-            <div className="di">
-              <Button variant="warning" type="submit" className="mb-3">
-                edit
-              </Button>
-            </div>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <MyNavBar />
+      <Container className="spa">
+        <Row>
+          <Col>
+            <Form className="text-light" onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label> TITOLO:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={titolo}
+                  onChange={(e) => {
+                    setTitolo(e.target.value);
+                  }}
+                  placeholder="titolo"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>TRAMA:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={trama}
+                  onChange={(e) => {
+                    setTrama(e.target.value);
+                  }}
+                  placeholder="trama"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>VOTO:</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={voto}
+                  onChange={(e) => {
+                    setVoto(e.target.value);
+                  }}
+                  placeholder="Voto da 1 a 10"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>IMMAGINE:</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={(e) => setImmagine(e.target.files[0])}
+                />
+              </Form.Group>
+              <Alert show={error} variant="danger">
+                edit non autorizzata solo gli admin possono farla
+              </Alert>
+              <div className="di">
+                <Button variant="warning" type="submit" className="mb-3">
+                  edit
+                </Button>
+              </div>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 export default AnimeMod;

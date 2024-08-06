@@ -1,8 +1,10 @@
 import { Col, Container, Modal, Row } from "react-bootstrap";
+import MyNavBar from "./MyNavBar";
 
 const ChiSiamo = () => {
   return (
     <Container>
+      <MyNavBar />
       <Row>
         <Col>
           <div

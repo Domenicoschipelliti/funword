@@ -3,8 +3,8 @@ import { Card } from "react-bootstrap";
 const MyFooter = () => {
   return (
     <>
-      <Card className="text-center text-light" bg="black">
-        <Card.Body>
+      <Card className="text-center text-light">
+        <Card.Body className="theme">
           <Card.Title>
             Socials For More Information About Anime and Manga
           </Card.Title>
@@ -25,7 +25,7 @@ const MyFooter = () => {
             </div>
           </Card.Text>
         </Card.Body>
-        <Card.Footer className="text-light pa">Funword-2024</Card.Footer>
+        <Card.Footer className="text-light pa theme">Funword-2024</Card.Footer>
       </Card>
     </>
   );

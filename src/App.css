@@ -32,6 +32,7 @@ body {
   display: flex;
   justify-content: center;
   color: white;
+  height: 30em;
 }
 
 .image {
@@ -77,7 +78,7 @@ body {
 }
 
 .ad:hover {
-  color: coral;
+  color: #dc3545;
 }
 
 .bi-bookmark-star::before {
@@ -180,4 +181,57 @@ body {
 
 .comme {
   justify-content: space-between;
+}
+
+.dimension {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.titolo {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.theme {
+  background-color: burlywood !important;
+}
+
+.pad {
+  padding-right: 20px !important;
+}
+
+.spa {
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+@media screen and (max-width: 900px) {
+  .spa {
+    margin-top: 0%;
+    margin-bottom: 19%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .spa {
+    margin-top: 0%;
+    margin-bottom: 22%;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .spa {
+    margin-top: 0%;
+    margin-bottom: 25%;
+  }
+}
+
+@media screen and (max-width: 324px) {
+  .spa {
+    margin-top: 0%;
+    margin-bottom: 31%;
+  }
 }

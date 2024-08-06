@@ -33,7 +33,7 @@ const Manga = () => {
     <Container>
       <Row>
         <h3 className="text-light">Manga</h3>
-        <Col className="dis">
+        <Col className="dis dimension">
           {manga &&
             manga.map((mangaList, i) => {
               return (

@@ -36,7 +36,7 @@ const User = () => {
           utente.map((ute, i) => {
             return (
               <Col className="ad" key={i}>
-                {ute.nome || "Accedi"}
+                {ute.nome}
               </Col>
             );
           })}

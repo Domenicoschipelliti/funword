@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "./assets/fungio_domi.png";
 import User from "./User";
 
 const Login = () => {
@@ -27,7 +28,7 @@ const Login = () => {
       .then((res) => {
         if (res.ok) {
           setTimeout(() => {
-            navigate("/");
+            navigate("/home");
           }, 2000);
 
           return res.json();
@@ -47,15 +48,12 @@ const Login = () => {
   console.log(token);
 
   return (
-    <Container className="log">
+    <Container className="log spa">
       <Row>
-        <h3>
-          Login{" "}
-          <img
-            src="https://cdn.discordapp.com/attachments/1186353558132633643/1207040744255258654/fungio_domi.png?ex=65de334b&is=65cbbe4b&hm=0c7711d0185a669e15c2d04fbc71d8a6acb153d1926af22d19b40f218ea139dd&"
-            alt=""
-            width="75px"
-          />
+        <h3 className="titolo">
+          <div>
+            Login <img src={logo} alt="" width="75px" />
+          </div>
         </h3>
         <Col>
           <Form
@@ -87,10 +85,12 @@ const Login = () => {
             <Alert show={error} variant="danger">
               email o password errati.
             </Alert>
-            <Button variant="danger" type="submit" className="mb-3">
-              Submit
-            </Button>
-            <p>
+            <div className="bot">
+              <Button variant="danger" type="submit" className="mb-3">
+                Submit
+              </Button>
+            </div>
+            <p className="bot">
               SE NON SEI ANCORA LOGGATO{" "}
               <Link to={"/register"} className="co">
                 REGISTRATI

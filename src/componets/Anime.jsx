@@ -34,7 +34,7 @@ const Anime = () => {
     <Container>
       <Row>
         <h3 className="text-light">Anime</h3>
-        <Col className="dis">
+        <Col className="dis dimension ">
           {anime &&
             anime.map((animeList, i) => {
               return (

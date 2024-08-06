@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import MyNavBar from "./MyNavBar";
 
 const Post = () => {
   const [titolo, setTitolo] = useState("");
@@ -87,6 +88,7 @@ const Post = () => {
 
   return (
     <Container>
+      <MyNavBar />
       <Row>
         <Col>
           <Form className="text-light" onSubmit={handleSubmit}>
